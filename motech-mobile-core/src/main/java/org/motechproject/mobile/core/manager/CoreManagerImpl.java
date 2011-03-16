@@ -42,8 +42,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * <p>Reponsible for the creation of all entities in the Core module</p>
- * 
  * @author Henry Sampson (henry@dreamoval.com)
  * @author Josepoh Djomeda (joseph@dreamoval.com)
  * Date Created: Aug 3, 2009

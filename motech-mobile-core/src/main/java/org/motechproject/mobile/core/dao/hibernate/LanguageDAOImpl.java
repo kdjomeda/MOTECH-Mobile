@@ -39,12 +39,9 @@ import org.motechproject.mobile.core.model.LanguageImpl;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.NonUniqueResultException;
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
- * LanguageDAOImpl is the implementation class of the LanguageDAO interface
- * This Class implements only LanguageDAO specific persistent operations to the Language model.
  *  Date : Sep 27, 2009
  * @author joseph Djomeda (joseph@dreamoval.com)
  */

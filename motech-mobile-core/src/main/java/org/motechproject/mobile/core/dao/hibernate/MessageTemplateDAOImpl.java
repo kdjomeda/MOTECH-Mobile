@@ -42,12 +42,9 @@ import org.motechproject.mobile.core.model.NotificationType;
 import javax.persistence.NonUniqueResultException;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
- *  MessageTemplateDAOImpl is the implementation class of the MessageTemplateDAO interface
- * This Class implements only MessageTemplateDAO specific persistent operation to the MessageTemplate model.
  *  Date : Sep 27, 2009
  * @author joseph Djomeda (joseph@dreamoval.com)
  */

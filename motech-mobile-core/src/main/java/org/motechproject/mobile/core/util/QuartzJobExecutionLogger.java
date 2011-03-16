@@ -31,10 +31,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package org.motechproject.mobile.core.util;
 
@@ -44,12 +41,13 @@ import org.quartz.JobExecutionException;
 import org.quartz.JobListener;
 
 /**
- *
- * @author Kweku
+ * @author Henry Sampson (henry@dreamoval.com)
+ * Date Created: Aug 10, 2009
  */
 public class QuartzJobExecutionLogger implements JobListener {
     private static final Logger logger = Logger.getLogger(QuartzJobExecutionLogger.class);
     String name;
+
 
     public String getName() {
         return name;
@@ -63,10 +61,20 @@ public class QuartzJobExecutionLogger implements JobListener {
         
     }
 
+
+    /**
+     *
+     * @param context
+     */
     public void jobExecutionVetoed(JobExecutionContext context) {
         
     }
 
+    /**
+     * 
+     * @param context
+     * @param jobException
+     */
     public void jobWasExecuted(JobExecutionContext context, JobExecutionException jobException) {
         String log = "\nName: " + context.getJobDetail().getName();
         log       += "\nDuration: " + (context.getJobRunTime() / 1000) + " seconds";

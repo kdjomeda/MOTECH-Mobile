@@ -43,10 +43,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.NonUniqueResultException;
 
 
-/*
- * GatewayResponseDAOImpl is the implementation class of the GatewayResponseDAO interface.
- * This Class implements only GatewayResponseDAO specific persistent operation to the GatewayResponse model.
- *
+/**
  * Date :Jul 24, 2009
  * @author Joseph Djomeda (jojo@dreamoval.com)
  * @author Henry Sampson (henry@dreamoval.com)
@@ -58,10 +55,10 @@ public class GatewayResponseDAOImpl extends HibernateGenericDAOImpl<GatewayRespo
 
     public GatewayResponseDAOImpl() {
     }
-    /*
+
+    /**
      * @see {@link org.motechproject.mobile.core.dao.GatewayResponseDAO#getMostRecentResponseByRequestId(java.lang.String) }
      */
-
     public GatewayResponse getMostRecentResponseByMessageId(Long messageId) {
         logger.debug("variable passed to getMostRecentResponseByRequestId: " + messageId);
 

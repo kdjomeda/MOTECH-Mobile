@@ -33,13 +33,23 @@
 
 package org.motechproject.mobile.core.util;
 
-
+/**
+ * A generic Exception class for motech-mobile
+ * @author 
+ */
 public class MotechException extends RuntimeException{
-    
+
+    /*
+     *
+     */
     public MotechException(){
         super();
     }
-    
+
+    /*
+     * 
+     * @param message
+     */
     public MotechException(String message){
         super(message);
     }

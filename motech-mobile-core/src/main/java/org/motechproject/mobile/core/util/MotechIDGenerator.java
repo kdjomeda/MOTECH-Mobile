@@ -79,7 +79,10 @@ public class MotechIDGenerator {
         return generateID(DEFUALT_ID_LENGTH);
     }
 
-
+    /**
+     * Generates UUID of the type String
+     * @return uuid of the type String
+     */
     public static String generateUUID(){
         logger.info("Calling UUID generator");
         UUID id = UUID.randomUUID();

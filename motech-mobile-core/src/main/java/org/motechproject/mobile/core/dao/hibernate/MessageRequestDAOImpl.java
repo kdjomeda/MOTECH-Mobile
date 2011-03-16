@@ -30,7 +30,6 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package org.motechproject.mobile.core.dao.hibernate;
 
 import org.motechproject.mobile.core.dao.MessageRequestDAO;
@@ -41,14 +40,11 @@ import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
 
 /**
- *  MessageRequestDAOImpl is the implementation class of the MessageRequestDAO interface
- * This Class implements only MessageRequestDAO specific persistent operation to the MessageRequest F model.
  *  Date : Sep 25, 2009
  * @author joseph Djomeda (joseph@dreamoval.com)
  */
@@ -67,12 +63,8 @@ public class MessageRequestDAOImpl extends HibernateGenericDAOImpl<MessageReques
 
 
         try {
-           
-            List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass())
-                    .add(Restrictions.eq("status", status))
-                    .add(Restrictions.lt("dateFrom", schedule))
-                    .add(Restrictions.gt("dateTo", schedule))
-                    .list();
+
+            List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass()).add(Restrictions.eq("status", status)).add(Restrictions.lt("dateFrom", schedule)).add(Restrictions.gt("dateTo", schedule)).list();
             logger.debug(msgRequest);
             return msgRequest;
 
@@ -90,12 +82,12 @@ public class MessageRequestDAOImpl extends HibernateGenericDAOImpl<MessageReques
      * @see  {@link org.motechproject.mobile.core.dao.MessageRequestDAO#getMsgRequestByStatusAndTryNumber(org.motechproject.mobile.core.model.MStatus, int)   }
      */
     public List getMsgRequestByStatusAndTryNumber(MStatus status, int tryNumber) {
-   
+
         logger.debug("variables passed to getMsgRequestByStatusAndTryNumber.status " + status + "And tryNumber: " + tryNumber);
 
         try {
 
-           
+
             Criterion eqStatus = Restrictions.eq("status", status);
             Criterion leTrynumb = Restrictions.le("tryNumber", tryNumber);
             LogicalExpression exp = Restrictions.and(eqStatus, leTrynumb);
@@ -113,17 +105,19 @@ public class MessageRequestDAOImpl extends HibernateGenericDAOImpl<MessageReques
 
     }
 
+    /**
+     *
+     * @see {@link org.motechproject.mobile.core.dao.MessageRequestDAO#getMsgByStatus(org.motechproject.mobile.core.model.MStatus) }
+     */
     public List<MessageRequest> getMsgByStatus(MStatus status) {
-   
+
         logger.debug("variable passed to getMsgRequestByStatusAndTryNumber. status: " + status);
 
         try {
 
-            
+
             Criterion eqStatus = Restrictions.eq("status", status);
-            List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass())
-                    .add(eqStatus)
-                    .list();
+            List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass()).add(eqStatus).list();
 
             logger.debug(msgRequest);
             return msgRequest;
@@ -137,45 +131,46 @@ public class MessageRequestDAOImpl extends HibernateGenericDAOImpl<MessageReques
 
     }
 
+    /**
+     *
+     * @see {@link  org.motechproject.mobile.core.dao.MessageRequestDAO#getMsgRequestByRecipientAndStatus(java.lang.String, org.motechproject.mobile.core.model.MStatus) }
+     */
     public List<MessageRequest> getMsgRequestByRecipientAndStatus(
-    		String recipientID, MStatus status) {
+            String recipientID, MStatus status) {
 
-    	logger.debug("variable passed to getMsgRequestByRecipientAndStatus.  recipientID: " + recipientID + " status: " + status);
+        logger.debug("variable passed to getMsgRequestByRecipientAndStatus.  recipientID: " + recipientID + " status: " + status);
 
-    	try {
+        try {
 
-    		
-    		Criterion eqStatus = Restrictions.eq("status", status);
-    		Criterion eqRecipient = Restrictions.eq("recipientId", recipientID);
-    		List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass())
-    				.add(eqRecipient)
-    				.add(eqStatus)
-    				.list();
 
-    		logger.debug(msgRequest);
-    		return msgRequest;
-    	} catch (HibernateException he) {
-    		logger.error("Persistence or JDBC Exception in Method getMsgRequestByRecipientAndStatus", he);
-    		return null;
-    	} catch (Exception ex) {
-    		logger.error("Exception in Method getMsgRequestByStatusAndTryNumber", ex);
-    		return null;
+            Criterion eqStatus = Restrictions.eq("status", status);
+            Criterion eqRecipient = Restrictions.eq("recipientId", recipientID);
+            List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass()).add(eqRecipient).add(eqStatus).list();
 
-    	}
+            logger.debug(msgRequest);
+            return msgRequest;
+        } catch (HibernateException he) {
+            logger.error("Persistence or JDBC Exception in Method getMsgRequestByRecipientAndStatus", he);
+            return null;
+        } catch (Exception ex) {
+            logger.error("Exception in Method getMsgRequestByStatusAndTryNumber", ex);
+            return null;
+
+        }
     }
 
-	public List<MessageRequest> getMsgRequestByRecipientAndSchedule(
-			String recipientID, Date schedule) {
+    /**
+     *
+     * @see {@link org.motechproject.mobile.core.dao.MessageRequestDAO#getMsgRequestByRecipientAndSchedule(java.lang.String, java.util.Date)}
+     */
+    public List<MessageRequest> getMsgRequestByRecipientAndSchedule(
+            String recipientID, Date schedule) {
         logger.debug("variables passed to getMsgRequestByRecipientAndSchedule. recipientID: " + recipientID + "And schedule: " + schedule);
 
 
         try {
-           
-            List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass())
-                    .add(Restrictions.eq("recipientId", recipientID))
-                    .add(Restrictions.lt("dateFrom", schedule))
-                    .add(Restrictions.gt("dateTo", schedule))
-                    .list();
+
+            List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass()).add(Restrictions.eq("recipientId", recipientID)).add(Restrictions.lt("dateFrom", schedule)).add(Restrictions.gt("dateTo", schedule)).list();
             logger.debug(msgRequest);
             return msgRequest;
 
@@ -186,20 +181,20 @@ public class MessageRequestDAOImpl extends HibernateGenericDAOImpl<MessageReques
             logger.error("Exception in Method getMsgRequestByStatusAndSchedule", ex);
             return null;
         }
-	}
+    }
 
-	public List<MessageRequest> getMsgRequestByRecipientDateFromBetweenDates(
-			String recipientID, Date startDate, Date endDate) {
+    /**
+     *
+     * @see {@link org.motechproject.mobile.core.dao.MessageRequestDAO#getMsgRequestByRecipientDateFromBetweenDates(java.lang.String, java.util.Date, java.util.Date) }
+     */
+    public List<MessageRequest> getMsgRequestByRecipientDateFromBetweenDates(
+            String recipientID, Date startDate, Date endDate) {
         logger.debug("variables passed to getMsgRequestByRecipientDateFromBetweenDates. recipientID: " + recipientID + " dateFrom after " + startDate + " before " + endDate);
 
 
         try {
-           
-            List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass())
-                    .add(Restrictions.eq("recipientId", recipientID))
-                    .add(Restrictions.gt("dateFrom", startDate))
-                    .add(Restrictions.lt("dateFrom", endDate))
-                    .list();
+
+            List msgRequest = this.getSessionFactory().getCurrentSession().createCriteria(this.getPersistentClass()).add(Restrictions.eq("recipientId", recipientID)).add(Restrictions.gt("dateFrom", startDate)).add(Restrictions.lt("dateFrom", endDate)).list();
             logger.debug(msgRequest);
             return msgRequest;
 
@@ -210,5 +205,5 @@ public class MessageRequestDAOImpl extends HibernateGenericDAOImpl<MessageReques
             logger.error("Exception in Method getMsgRequestByStatusAndSchedule", ex);
             return null;
         }
-	}
+    }
 }

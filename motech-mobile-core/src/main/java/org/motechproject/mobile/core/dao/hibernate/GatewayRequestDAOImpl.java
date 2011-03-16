@@ -44,10 +44,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 
-/*
- * GatewayRequestDAOImpl is the implementation class of the GatewayRequestDAO interface
- * This Class implements only GatewayRequestDAO specific persistent operation to the GatewayRequest model.
- * 
+/** 
  * Date: Jul 24, 2009
  * @author Joseph Djomeda (joseph@dreamoval.com)
  * @author Henry Sampson (henry@dreamoval.com)

@@ -30,8 +30,6 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-
 package org.motechproject.mobile.core.dao.hibernate;
 
 import org.motechproject.mobile.core.dao.GenericDAO;
@@ -44,12 +42,7 @@ import org.hibernate.criterion.Example;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 
-
-/*
- * HibernateGenericDAOImpl is the hibernate implementation of the genericDAO interface
- * that defines the contract of common persistence methods.
- * This class should be extended by  implementation of every domain DAO
- *
+/**
  *  Date : Jul 31, 2009
  * @author joseph Djomeda (joseph@dreamoval.com)
  */
@@ -63,15 +56,15 @@ public abstract class HibernateGenericDAOImpl<T> implements GenericDAO<T> {
         this.persistentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-        /**
-     * @return the session
+    /**
+     * @return the sessionFactory object
      */
     public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
     /**
-     * @param session the session to set
+     * @param sessionFactory the sessionFactory to set
      */
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -85,8 +78,6 @@ public abstract class HibernateGenericDAOImpl<T> implements GenericDAO<T> {
         return persistentClass;
     }
 
-
-
     /**
      * Gets all objects of type T
      * @return List of entity Type T
@@ -98,13 +89,12 @@ public abstract class HibernateGenericDAOImpl<T> implements GenericDAO<T> {
     }
 
     /**
-     * Perfoms a search based on a criterion or no criterion
+     * Performs a search based on a criterion or no criterion
      * @param criterion array of criterion or no criterion
      * @return List of entity of type T
      */
     protected List<T> findByCriteria(Criterion... criterion) {
         logger.info("Callint FindByCriteria");
-//        Criteria crit = getDBSession().getSession().createCriteria(getPersistentClass());
         Criteria crit = this.getSessionFactory().getCurrentSession().createCriteria(getPersistentClass());
         for (Criterion c : criterion) {
             crit.add(c);
@@ -136,8 +126,8 @@ public abstract class HibernateGenericDAOImpl<T> implements GenericDAO<T> {
         return entity;
     }
 
-    public T merge(T entity){
-        return (T)this.getSessionFactory().getCurrentSession().merge(entity);
+    public T merge(T entity) {
+        return (T) this.getSessionFactory().getCurrentSession().merge(entity);
     }
 
     /**
@@ -151,12 +141,12 @@ public abstract class HibernateGenericDAOImpl<T> implements GenericDAO<T> {
 
     public void flush() {
         logger.info("Calling session fush");
-         this.getSessionFactory().getCurrentSession().flush();
+        this.getSessionFactory().getCurrentSession().flush();
     }
 
     public void clear() {
         logger.info("Calling session clear");
-         this.getSessionFactory().getCurrentSession().clear();
+        this.getSessionFactory().getCurrentSession().clear();
     }
 
     /**
@@ -165,7 +155,7 @@ public abstract class HibernateGenericDAOImpl<T> implements GenericDAO<T> {
     @SuppressWarnings("unchecked")
     public List<T> findByExample(T exampleInstance, String... excludeProperty) {
         logger.info("Calling findByExample");
-        Criteria crit =  this.getSessionFactory().getCurrentSession().createCriteria(getPersistentClass());
+        Criteria crit = this.getSessionFactory().getCurrentSession().createCriteria(getPersistentClass());
         Example example = Example.create(exampleInstance);
         if (excludeProperty.length != 0) {
             for (String exclude : excludeProperty) {
@@ -175,6 +165,4 @@ public abstract class HibernateGenericDAOImpl<T> implements GenericDAO<T> {
         crit.add(example);
         return crit.list();
     }
-
-
 }

@@ -38,11 +38,11 @@ import org.motechproject.mobile.core.model.*;
 import org.motechproject.mobile.model.dao.imp.*;
 
 import java.io.Serializable;
-import org.hibernate.SessionFactory;
 
 /**
- * This interface is responsible for the creation of all objects
- * in the core module.
+ * Creates every single Entity and class in org.motechproject.mobile.core .It's spring applicationcontext aware
+ * and is responsible of creating <b>core module</b> various class by getting objects instantiated
+ * by spring.
  *
  * @author Henry Sampson (henry@dreamoval.com)
  * @author Joseph Djomeda (joseph@dreamoval.com)

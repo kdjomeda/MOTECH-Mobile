@@ -37,20 +37,22 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.apache.log4j.Logger;
 
 /**
- * DateProvider is a helper class that provides methods to manipulate Date instances.
- * Giving formating pattens and having date expressions in pure string etc
+ * Provides methods to manipulate Date instances.It's a helper class that provides various
+ * method to get date in different formating patterns and convert date object from and to string
+ * 
  *  Date : Oct 16, 2009
  * @author joseph Djomeda (joseph@dreamoval.com)
  */
 public class DateProvider {
-
+    private static Logger logger = Logger.getLogger(DateProvider.class);
     static DateFormat df;
     static Date date;
 
     /**
-     * Method to convert a string representation of a Date of object and parse based on the formating pattern specified.
+     * Converts a string representation of a Date object and parses it based on the formating pattern specified.
      * @param stringDate Date to parse
      * @return A Date Object with the new formating.
      */
@@ -59,13 +61,13 @@ public class DateProvider {
         try {
             date = df.parse(stringDate);
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.debug("Error occured while converting to datetime",e);
         }
         return date;
     }
 
    /**
-    * Method to provide new Date based on a certain formating pattern
+    * Provides new Date based on a certain formating pattern
     * @return new Date with the specified formating.
     */
     public static Date getNowDateTime() {
@@ -73,15 +75,15 @@ public class DateProvider {
         try {
             date = df.parse("");
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.debug("Error occured while getting current datetime",e);
         }
         return date;
 
     }
 
     /**
-     * Method to provide a String representation of new Date bassed on certain formating pattern
-     * @return String reprensentation of new Date
+     * Provides a String representation of new Date based on certain formating pattern
+     * @return String representation of new Date
      */
      public static String getNowStringDateTime() {
          
@@ -91,7 +93,7 @@ public class DateProvider {
             stringdate = df.format(new Date());
             return stringdate;
         } catch (Exception e) {
-            e.printStackTrace();
+             logger.debug("Error occured while getting cuurent datetime in string",e);
             return "";
         }
       
